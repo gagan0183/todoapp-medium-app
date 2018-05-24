@@ -10,6 +10,7 @@ var usersRouter = require('./routes/users');
 
 var url = "mongodb://127.0.0.1:27017/todoapp";
 
+
 mongoose.connect(url)
   .then(() => {
     console.log('Successfully connected to mongodb');
