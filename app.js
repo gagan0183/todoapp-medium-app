@@ -9,6 +9,8 @@ var bluebird = require('bluebird');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+var api = require('./routes/api.route');
+
 var url = "mongodb://127.0.0.1:27017/todoapp";
 
 mongoose.Promise = bluebird;
@@ -40,6 +42,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+api.use('/api', api);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
