@@ -22,6 +22,7 @@ exports.createTodo = async function(todo) {
         description: todo.description,
         startDate: todo.startDate,
         completeDate: todo.completeDate,
+        link: todo.link,
         status: todo.status
     });
 
@@ -35,10 +36,13 @@ exports.createTodo = async function(todo) {
 }
 
 exports.updateTodo =  async function(todo) {
-    var id = todo.id;
+    console.log(todo);
+    var id = todo._id;
+
+    console.log(id);
 
     try {
-        var oldTodo = ToDo.findById(id);
+        var oldTodo = await ToDo.findById(id);
     }
     catch(e) {
         throw Error('Error occurred while finding todo');
@@ -54,21 +58,22 @@ exports.updateTodo =  async function(todo) {
     oldTodo.description = todo.description;
     oldTodo.startDate = todo.startDate;
     oldTodo.completeDate = todo.completeDate;
-    oldTodo.startDate = todo.status;
+    oldTodo.link = todo.link;
+    oldTodo.status = todo.status;
 
     try {
         var saveTodo = await oldTodo.save();
         return saveTodo;
     }
     catch(e) {
-        throw Error('Error is that');
+        throw Error('Error occurred there');
     }
 }
 
 exports.removeTodo = async function(id) {
     try {
         var deleted = await ToDo.remove({_id: id});
-        if(deleted.result.n === 0) {
+        if(deleted.n === 0) {
             throw Error('Todo could not be deleted');
         }
         return deleted;

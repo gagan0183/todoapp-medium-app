@@ -7,6 +7,7 @@ var ToDoSchema = new mongoose.Schema({
     description: String,
     startDate: Date,
     completeDate: Date,
+    link: String,
     status: String
 });
 
